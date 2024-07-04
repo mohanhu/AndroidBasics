@@ -12,11 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androidbasicapp.ui.theme.AndroidBasicAppTheme
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        println("MainActivity >>> onCreate")
+
         setContent {
             AndroidBasicAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -27,6 +32,31 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        println("MainActivity >>> onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("MainActivity >>> onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("MainActivity >>> onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        println("MainActivity >>> onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("MainActivity >>> onDestroy")
     }
 }
 
