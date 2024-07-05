@@ -1,6 +1,7 @@
 package com.example.androidbasicapp.ui.activities
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidbasicapp.R
+import com.example.androidbasicapp.ui.receiver.AirplaneModeReceiver
 import com.example.androidbasicapp.ui.theme.AndroidBasicAppTheme
 import java.util.Locale
 
@@ -43,9 +45,13 @@ class MainActivity : ComponentActivity() {
         }
     )
 
+    private val airplaneModeReceiver by lazy { AirplaneModeReceiver() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        registerReceiver(airplaneModeReceiver, IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED))
 
         println("MainActivity >>> onCreate")
 
@@ -132,6 +138,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(airplaneModeReceiver)
         println("MainActivity >>> onDestroy")
     }
 
